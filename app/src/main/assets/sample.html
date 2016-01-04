@@ -1,8 +1,42 @@
 <!DOCTYPE html>
-<form method="post" action="example.cgi" enctype="multipart/form-data">
+<head>
+    <script type="text/javascript">
+        function chooseImage(){
+            Native.onShowFileChooser()
+        }
 
-    <input type="file" name="ファイル選択"></p>
+        function chooseImgResult(encodedImage) {
+            var divImgZone = document.getElementById("imgZone");
+
+            var img = document.createElement("img");
+            img.height = 100;
+            img.width = 100;
+            img.src = "data:image/png;base64," + encodedImage;
+
+            divImgZone.appendChild(img);
+
+            var newElement = document.createElement("input");
+            newElement.type = "hidden";
+            newElement.name = "uploadImg" + j + i;
+            newElement.value = encodedImage;
+
+            form.appendChild(newElement);
+
+            var btnSubmit = document.getElementById("mySubmit");
+            btnSubmit.disabled = false;
+
+        }
+
+    </script>
+</head>
+<body>
+<form id="form" method="post" action="example.cgi" enctype="multipart/form-data">
+
+    <input type="file" name="ファイル選択" onclick="chooseImage()"></p>
+
+    <div id="imgZone"></div>
 
     <p><input type="submit" value="送信する"></p>
 
 </form>
+</body>
